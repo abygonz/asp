@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: aspnet
+    app.kubernetes.io/instance: aspnet-instance
+    app.kubernetes.io/version: '1.0.0'
+    app.kubernetes.io/managed-by: kubectl
+  name: aspnet-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aspnet
+  template:
+    metadata:
+      labels:
+        app: aspnet
+    spec:
+      containers:
+        - image: 621774848652.dkr.ecr.us-west-2.amazonaws.com/aspnet:latest
+          imagePullPolicy: Always
+          name: aspnet
+          ports:
+            - containerPort: 80
